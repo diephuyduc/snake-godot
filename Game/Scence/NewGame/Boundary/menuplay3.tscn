@@ -1,0 +1,209 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://fonts/MenuButton.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scence/NewGame/Boundary/menuplay3.gd" type="Script" id=2]
+[ext_resource path="res://Assets/logo2.png" type="Texture" id=3]
+[ext_resource path="res://fonts/DMMono-Light.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 4 )
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends RichTextLabel
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var file = File.new()
+	file.open(\"res://Assets/Score/score_boundary.txt\", File.READ)
+	var line
+	while not file.eof_reached():
+		line = file.get_line()
+		line  = line + line
+	file.close()
+	
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+font_data = ExtResource( 4 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="logo2" type="Sprite" parent="."]
+position = Vector2( 647.717, 88.138 )
+scale = Vector2( 1.45398, 1.45398 )
+texture = ExtResource( 3 )
+
+[node name="play" type="Button" parent="."]
+margin_left = 413.577
+margin_top = 164.767
+margin_right = 845.577
+margin_bottom = 282.767
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="play"]
+margin_left = -6.10352e-05
+margin_top = 2.39166
+margin_right = 436.0
+margin_bottom = 112.392
+custom_fonts/font = ExtResource( 1 )
+text = "PLAY"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="highscore" type="Button" parent="."]
+margin_left = 410.253
+margin_top = 298.592
+margin_right = 842.253
+margin_bottom = 416.592
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="highscore"]
+margin_left = 4.55011
+margin_top = 2.62489
+margin_right = 440.55
+margin_bottom = 112.625
+custom_fonts/font = ExtResource( 1 )
+text = "HIGH SCORE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Guiding" type="Button" parent="."]
+margin_left = 417.428
+margin_top = 434.917
+margin_right = 849.428
+margin_bottom = 552.917
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Guiding"]
+margin_left = 4.55005
+margin_top = 2.62486
+margin_right = 440.55
+margin_bottom = 112.625
+custom_fonts/font = ExtResource( 1 )
+text = "GUIDING"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="quit" type="Button" parent="."]
+margin_left = 424.603
+margin_top = 576.025
+margin_right = 856.603
+margin_bottom = 694.025
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="quit"]
+margin_left = -2.62494
+margin_top = 2.62489
+margin_right = 433.375
+margin_bottom = 112.625
+custom_fonts/font = ExtResource( 1 )
+text = "QUIT"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Popup" type="Popup" parent="."]
+visible = true
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="PopupMenu" type="PopupMenu" parent="Popup"]
+margin_left = 331.255
+margin_top = 169.0
+margin_right = 984.255
+margin_bottom = 612.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Popup/PopupMenu"]
+margin_left = 26.4621
+margin_top = 60.7936
+margin_right = 623.462
+margin_bottom = 363.794
+custom_fonts/mono_font = SubResource( 1 )
+custom_colors/default_color = Color( 1, 0, 0, 1 )
+custom_colors/selection_color = Color( 1, 0, 0, 1 )
+custom_colors/font_color_selected = Color( 1, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 1, 0, 0, 1 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Popup/PopupMenu"]
+margin_top = 14.0
+margin_right = 607.0
+margin_bottom = 61.0
+custom_fonts/font = SubResource( 3 )
+text = "HIGH SCORE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Popup/PopupMenu"]
+margin_left = 484.514
+margin_top = 363.535
+margin_right = 604.514
+margin_bottom = 412.535
+flat = true
+
+[node name="Label" type="Label" parent="Popup/PopupMenu/Button"]
+margin_left = -0.163269
+margin_top = -2.07404
+margin_right = 112.837
+margin_bottom = 43.926
+custom_fonts/font = SubResource( 4 )
+text = "Quit"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="highscore" to="." method="_on_highscore_pressed"]
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Popup/PopupMenu/Button" to="." method="_on_Button_pressed"]
