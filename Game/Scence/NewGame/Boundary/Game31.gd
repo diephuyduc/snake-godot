@@ -12,6 +12,7 @@ var root_coordinates = Vector2(0,0)
 var gap = font_size - font_size/2
 var award = Vector2(0,0); var is_scale = false; var is_pause = false; var present_pausing_position = Vector2()
 var number_of_action =0;
+var i=0;
 func _ready():
 	font = load("res://fonts/BodoniMTBlack.fnt")
 	set_process_input(true)
@@ -54,9 +55,6 @@ func _input(event):
 			is_pause = false
 	update()
 func food():
-	if (feed.x) <root_coordinates.x || (feed.x)>width+ root_coordinates.x:
-			if (feed.y) <root_coordinates.y || (feed.y) >height+root_coordinates.y: 
-				feed = Vector2(0,0)
 	if feed == Vector2(0,0):
 		randomize()
 		var xx = int(rand_range(root_coordinates.x+gap,root_coordinates.x +width-gap))
@@ -66,8 +64,8 @@ func food():
 		snake.push_front(snake[0] + direction)
 		get_node("showscore").text = str(snake.size())
 		feed = Vector2(0,0)
+	update()
 func run_in_boundary():
-	
 	if award == Vector2(0,0) and (number_of_action +3)% 7==0 and game_over ==false:
 		randomize()
 		is_scale = true
@@ -78,12 +76,18 @@ func run_in_boundary():
 		is_scale = false
 		award = Vector2(0,0)
 	if number_of_action % 7 ==0 and is_scale == true and game_over == false:
-		root_coordinates.x = int( (width*0.09)/2)
-		root_coordinates.y = int ((height*0.09)/2)
-		height = height - height *0.005
-		width = width -width*0.005
+		i = i+1
+		if(i==1):
+			root_coordinates.x = int( (width*0.09)/2)
+			root_coordinates.y = int ((height*0.09)/2)
+			height = height - height *0.005
+			width = width -width*0.005
+			feed = Vector2(0,0)
+			food()
+		
 	elif (number_of_action -1)%7 ==0:
 		award = Vector2(0,0)
+		i=0
 	update()
 
 func _physics_process(delta):
@@ -100,14 +104,13 @@ func _physics_process(delta):
 	
 
 func _draw():
+	draw_rect(Rect2(0, 0, 1100, 700), Color("#000FFF"), false )
+	draw_rect(Rect2(root_coordinates.x, root_coordinates.y, width, height), Color("#000FFF"), false)
+	draw_string(font, Vector2(feed), "o", Color(1,0,1)) 
+	draw_string(font, Vector2(award), "*", Color(1,0,0)) 
 	get_node("noaction").text = str(number_of_action)
 	for i in range(0, snake.size()): 
 		 draw_string(font, Vector2(snake[i].x*gap, snake[i].y*gap),"o", Color(0,0,1))
-	draw_string(font, Vector2(feed), "o", Color(1,0,1)) 
-	draw_string(font, Vector2(award), "*", Color(1,0,0)) 
-	draw_rect(Rect2(root_coordinates.x, root_coordinates.y, width, height), Color("#000FFF"), false)
-	draw_rect(Rect2(0, 0, 1100, 700), Color("#000FFF"), false )
-	
 
 func end_game():
 	if game_over == true:
