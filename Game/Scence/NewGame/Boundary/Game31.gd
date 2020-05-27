@@ -10,7 +10,7 @@ var direction = down
 var height = 600; var width = 1000
 var root_coordinates = Vector2(0,0)
 var gap = font_size - font_size/2
-var award = Vector2(0,0); var is_scale = false; var pause = false; var present_pausing_position = Vector2()
+var award = Vector2(0,0); var is_scale = false; var is_pause = false; var present_pausing_position = Vector2()
 var number_of_action =0;
 func _ready():
 	font = load("res://fonts/BodoniMTBlack.fnt")
@@ -21,7 +21,7 @@ func move_snake():
 	print(str(snake[0].x) +"  "+ str(root_coordinates.x))
 	print(str(snake[0].y) +"  "+ str(root_coordinates.y))
 	if  (snake[0].x*gap+direction.x ) >int(root_coordinates.x) and (snake[0].x*gap +direction.x +gap)<width+ root_coordinates.x:
-		if (snake[0].y*gap+direction.y) >int(root_coordinates.y) and (snake[0].y*gap +direction.y) <height+root_coordinates.y: 
+		if (snake[0].y*gap+direction.y-gap) >int(root_coordinates.y) and (snake[0].y*gap +direction.y) <height+root_coordinates.y: 
 			snake.push_front(snake[0]+direction)
 			snake.pop_back()
 		else: game_over = true
@@ -42,6 +42,16 @@ func _input(event):
 	if Input.is_action_pressed("ui_right") : 
 		direction = right
 		number_of_action = number_of_action +1
+	if Input.is_action_pressed("ui_accept"):
+		if is_pause == false:
+			present_pausing_position = direction
+			direction = Vector2(0,0)
+			$PopupMenu2.show()
+			is_pause = true
+		else:
+			direction = present_pausing_position
+			$PopupMenu2.hide()
+			is_pause = false
 	update()
 func food():
 	if (feed.x) <root_coordinates.x || (feed.x)>width+ root_coordinates.x:
@@ -60,6 +70,7 @@ func run_in_boundary():
 	
 	if award == Vector2(0,0) and (number_of_action +3)% 7==0 and game_over ==false:
 		randomize()
+		is_scale = true
 		var xx = int(rand_range(root_coordinates.x+gap,root_coordinates.x +width-gap))
 		var yy = int (rand_range(root_coordinates.y+gap , root_coordinates.y+height-gap))
 		award = Vector2 (xx, yy)
@@ -67,8 +78,8 @@ func run_in_boundary():
 		is_scale = false
 		award = Vector2(0,0)
 	if number_of_action % 7 ==0 and is_scale == true and game_over == false:
-		root_coordinates.x = int( (width*0.05)/2)
-		root_coordinates.y = int ((height*0.05)/2)
+		root_coordinates.x = int( (width*0.09)/2)
+		root_coordinates.y = int ((height*0.09)/2)
 		height = height - height *0.005
 		width = width -width*0.005
 	elif (number_of_action -1)%7 ==0:

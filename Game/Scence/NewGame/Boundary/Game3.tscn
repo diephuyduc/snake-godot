@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scence/NewGame/Boundary/Game31.gd" type="Script" id=1]
 [ext_resource path="res://fonts/MenuButton.tres" type="DynamicFont" id=2]
@@ -24,6 +24,18 @@ font_data = ExtResource( 3 )
 size = 20
 outline_color = Color( 0.501961, 0.0784314, 0.0784314, 1 )
 font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=12]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -234,6 +246,44 @@ custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0.501961, 0.0784314, 0.0784314, 1 )
 custom_colors/font_outline_modulate = Color( 0.501961, 0.0784314, 0.0784314, 1 )
 custom_colors/font_color_shadow = Color( 0.501961, 0.0784314, 0.0784314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PopupMenu2" type="PopupMenu" parent="."]
+modulate = Color( 0.972549, 0.411765, 0.203922, 1 )
+margin_left = 521.0
+margin_top = 315.0
+margin_right = 767.0
+margin_bottom = 391.0
+mouse_filter = 2
+custom_styles/labeled_separator_left = SubResource( 7 )
+custom_styles/hover = SubResource( 8 )
+custom_styles/labeled_separator_right = SubResource( 9 )
+custom_styles/panel_disabled = SubResource( 10 )
+custom_styles/panel = SubResource( 11 )
+custom_styles/separator = SubResource( 12 )
+custom_colors/font_color_disabled = Color( 1, 0, 0, 1 )
+custom_colors/font_color_accel = Color( 0.968627, 0.0235294, 0.0235294, 1 )
+custom_colors/font_color = Color( 0.968627, 0.0470588, 0.0470588, 1 )
+custom_colors/font_color_hover = Color( 0.980392, 0.0313726, 0.0313726, 1 )
+popup_exclusive = true
+hide_on_item_selection = false
+hide_on_checkable_item_selection = false
+submenu_popup_delay = 0.01
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PopupMenu2"]
+margin_left = 8.0
+margin_top = 6.0
+margin_right = 241.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 2 )
+text = "PAUSING"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
