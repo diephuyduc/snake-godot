@@ -42,3 +42,11 @@ func _on_Button_pressed():
 
 func _on_quit_pressed():
 	get_tree().change_scene("res://Scence/NewGame/menuNewGame.tscn")
+
+
+func _on_Button2_pressed():
+	$Popup2/PopupMenu.hide()
+
+
+func _on_Guiding_pressed():
+	$Popup2/PopupMenu.show()
